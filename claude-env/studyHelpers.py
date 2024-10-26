@@ -1,4 +1,6 @@
 import anthropic;
+import os
+import json
 
 client = anthropic.Anthropic()
 
@@ -62,3 +64,13 @@ def create_study_planner(study_guide, subject, test_date, session_number, sessio
     )
     study_planner_string = str(study_planner.content)[17:-16].replace("\\n", "\n")
     return study_planner_string
+
+
+# Imports data from the tempJson file that is being defined when a study guide request is submitted
+def import_temp_json():
+    json_path = 'tempData.json'
+    json_data = None
+    with open(json_path, 'r') as json_file:
+        json_data = json.load(json_file)
+    
+    return json_data
