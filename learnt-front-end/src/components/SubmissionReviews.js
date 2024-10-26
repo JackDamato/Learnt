@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react';
-import { jsPDF } from 'jspdf'; // Import jsPDF
+import { jsPDF } from 'jspdf';
 import "../styles/SubmissionReviews.css";
+import Loading from './Loading';
 
 const SubmissionReviews = () => {
   const [studyGuide, setStudyGuide] = useState('');
@@ -11,8 +12,11 @@ const SubmissionReviews = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  
+
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await fetch('/data'); // Make sure to replace with the correct URL if necessary
         if (!response.ok) {
@@ -33,6 +37,7 @@ const SubmissionReviews = () => {
   }, []);
 
   const generatePracticeQuestions = async () => {
+    setLoading(true); 
     try {
       const response = await fetch('/questions', {
         method: 'POST',
@@ -50,6 +55,8 @@ const SubmissionReviews = () => {
       setPracticeQuestions(data); // Set the received questions
     } catch (error) {
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -121,22 +128,18 @@ const SubmissionReviews = () => {
       doc.text(line, margin, currentY);
       currentY += lineSpacing; 
     });
-
   
     doc.save(`${subject} Study Guide.pdf`);
   };
   
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
   if (error) {
     return <p>Error fetching data: {error}</p>;
   }
 
   return (
     <div>
-      <div className="button-wrapper" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+      {loading && <Loading />}
+      <div className="button-wrapper" style={{ display: 'flex', justifyContent: 'space-between'}}>
         <div className="pdf-button-wrapper">
           <button onClick={saveToPDF} className="study-guide-pdf-button">
             Save {subject} Study Guide

@@ -1,51 +1,91 @@
-// import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import '../styles/Dashboard.css';
-import ProgressWheel from './ProgressWheel';
-// import ToDoList from './ToDoList';
-// import SubjectCards from './SubjectCards';
+import { jsPDF } from 'jspdf';
 
 function Dashboard() {
-  // const [tasks, setTasks] = useState([
-  //   { id: 1, text: 'Study Chapter 1', completed: false },
-  //   { id: 2, text: 'Complete Assignment 2', completed: false },
-  //   { id: 3, text: 'Revise Notes', completed: false },
-  //   { id: 4, text: 'Practice Problems', completed: false },
-  //   { id: 5, text: 'Group Study Session', completed: false },
-  // ]);
+  const navigate = useNavigate(); 
+  const [studyGuides, setStudyGuides] = useState([]);
 
-  const navigate = useNavigate(); // Create a navigate function
-
-  // const handleTaskChange = (updatedTasks) => {
-  //   setTasks(updatedTasks);
-  // };
+  useEffect(() => {
+    // Load study guides from localStorage
+    const savedStudyGuides = JSON.parse(localStorage.getItem('studyGuides')) || [];
+    setStudyGuides(savedStudyGuides);
+  }, []);
 
   const handleAddSubjectClick = () => {
-    navigate('/form'); // Navigate directly to the form page
+    navigate('/form'); 
   };
 
+  const downloadPDF = (guide) => {
+    const { studyGuide, studyPlanner, subject } = guide;
+    const doc = new jsPDF();
+    const margin = 10; 
+    const pageWidth = doc.internal.pageSize.getWidth() - 2 * margin; 
+    const titleYPosition = margin + 10;
+    const bodyStartY = titleYPosition + 10;
+    const lineSpacing = 6; 
 
-  // const completedTasks = tasks.filter(task => task.completed).length;
-  // const totalTasks = tasks.length;
-  const progressPercentage = (5 / 8) * 100;
+    doc.setFontSize(18);
+    doc.setFont("helvetica", "bold");
+    doc.text(`Study Guide for ${subject}`, margin, titleYPosition);
+
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "normal");
+
+    const studyGuideLines = doc.splitTextToSize(studyGuide, pageWidth);
+    let currentY = bodyStartY;
+
+    studyGuideLines.forEach((line) => {
+      if (currentY + lineSpacing > doc.internal.pageSize.height - margin) {
+        doc.addPage();
+        currentY = margin;
+      }
+      doc.text(line, margin, currentY);
+      currentY += lineSpacing;
+    });
+
+    doc.addPage();
+    doc.setFontSize(18);
+    doc.text(`Study Plan:`, margin, titleYPosition);
+
+    const studyPlannerLines = doc.splitTextToSize(studyPlanner, pageWidth);
+    currentY = bodyStartY;
+
+    studyPlannerLines.forEach((line) => {
+      if (currentY + lineSpacing > doc.internal.pageSize.height - margin) {
+        doc.addPage();
+        currentY = margin;
+      }
+      doc.text(line, margin, currentY);
+      currentY += lineSpacing;
+    });
+
+    doc.save(`${subject} Study Guide.pdf`);
+  };
 
   return (
     <div className="dashboard">
-      <div className="progress-section">
-        <ProgressWheel percentage={progressPercentage} />
+      <div className="previous-study-guides">
+        <h2>Previous Study Guides</h2>
+          {studyGuides.length > 0 ? (
+            [...studyGuides].reverse().map((guide, index) => (
+              <div key={index} className="study-guide-item">
+                <p><strong>Subject:</strong> {guide.subject}</p>
+                <p><strong>Date Created:</strong> {guide.date}</p>
+                <button className="download-button" onClick={() => downloadPDF(guide)}>Download PDF</button>
+              </div>
+            ))
+          ) : (
+            <p>No study guides available. Create a new one!</p>
+          )}
       </div>
-      {/* <div className="todo-section">
-        <ToDoList tasks={tasks} setTasks={handleTaskChange} />
-      </div> */}
       <div className="subject-section">
-        {/* Directly navigate to form on button click */}
-        <div className='button-wrapper'>
-          <button className='add-subject-button' onClick={handleAddSubjectClick}>Create New Study Guide</button>
+        <div className="button-wrapper">
+          <button className="add-subject-button" onClick={handleAddSubjectClick}>
+            Create New Study Guide
+          </button>
         </div>
-        {/* <div className='cards-wrapper'>
-          <SubjectCards />
-        </div> */}
       </div>
     </div>
   );

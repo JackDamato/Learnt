@@ -1,33 +1,32 @@
-/* src/styles/Form.css */
 .form {
-  max-width: 500px; /* Set a max width for the form */
-  margin: 20px auto; /* Center the form on the page */
-  padding: 20px; /* Add some padding inside the form */
-  border: 1px solid #ccc; /* Light border around the form */
-  border-radius: 8px; /* Rounded corners */
-  background-color: #f9f9f9; /* Light background color */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-width: 500px; 
+  margin: 20px auto; 
+  padding: 20px; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  background-color: #f9f9f9; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .form input {
-  width: 100%; /* Full width inputs */
-  padding: 10px; /* Padding inside inputs */
-  margin: 10px 0; /* Space between inputs */
-  border: 1px solid #ccc; /* Light border around inputs */
-  border-radius: 4px; /* Rounded corners for inputs */
-  font-size: 16px; /* Increase font size */
+  width: 100%; 
+  padding: 10px; 
+  margin: 10px 0; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  font-size: 16px; 
 }
 
 .form .submit-button {
-  background-color: #5d9fd3; /* Blue background for submit button */
-  color: white; /* White text */
-  padding: 10px; /* Padding inside button */
-  border: none; /* Remove border */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  font-size: 16px; /* Increase font size */
+  background-color: #5d9fd3;
+  color: white; 
+  padding: 10px; 
+  border: none; 
+  border-radius: 4px; 
+  cursor: pointer; 
+  font-size: 16px; 
 }
 
 .form .submit-button:hover {
-  background-color: #4291ce; /* Darker blue on hover */
+  background-color: #4291ce;
 }
