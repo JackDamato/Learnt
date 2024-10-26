@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()
 api_key = os.getenv("ANTHROPIC_API_KEY")
 client = anthropic.Anthropic(api_key=api_key)
-# '7c921b05e459fd3a2cd14b0fe2a7dc6367f489fe'
 
 study_guide_global = None
 study_planner_global = None
