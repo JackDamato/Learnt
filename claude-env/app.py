@@ -81,6 +81,5 @@ def create_study_planner(study_guide):
 
     return study_planner_string
 
-
 if __name__ == '__main__':
     app.run(debug=True)
