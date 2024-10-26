@@ -61,7 +61,7 @@ function Form() {
       />
       <input
         type="text"
-        placeholder="Topic of Exam"
+        placeholder="Exam Topics/Material"
         value={topicOfExam}
         onChange={(e) => setTopicOfExam(e.target.value)}
         required

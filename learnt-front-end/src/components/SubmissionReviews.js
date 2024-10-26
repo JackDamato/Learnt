@@ -10,24 +10,24 @@ const SubmissionReviews = () => {
 
   return (
     <div>
-      <h1>Submission Review</h1>
+      {/* <h1>Submission Review</h1> */}
       {formData ? (
         <div>
-          <h2>Review Your Submission</h2>
+          {/* <h2>Review Your Submission</h2>
           <p><strong>Subject/Class Name:</strong> {formData.subject}</p>
           <p><strong>Topic of Exam:</strong> {formData.topics}</p>
           <p><strong>Learning Goals:</strong> {formData.learning_goals}</p>
           <p><strong>Test Date:</strong> {formData.date}</p>
           <p><strong>Available Study Sessions:</strong> {formData.number}</p>
-          <p><strong>Work Time Per Session:</strong> {formData.length}</p>
-          <div className="body">
+          <p><strong>Work Time Per Session:</strong> {formData.length}</p> */}
+          <div className="submission-body">
             <div className="study-guide-wrapper">
-              <h3>Generated Study Guide:</h3>
-              <p>{studyGuide}</p>
+              <h3>Study Guide for {formData.subject}</h3>
+              <pre>{studyGuide}</pre>
             </div>
             <div className="study-planner-wrapper">
-              <h3>Generated Study Planner:</h3>
-              <p>{studyPlanner}</p>
+              <h3>Study Planner</h3>
+              <pre>{studyPlanner}</pre>
             </div>
           </div>
         </div>
