@@ -50,6 +50,8 @@
   box-sizing: border-box;
   text-align: center;
   max-height: 10%;
+  justify-content: center;
+  align-items: center;
 }
 
 .add-subject-button {

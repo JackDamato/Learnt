@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 import '../styles/Dashboard.css';
 import ProgressWheel from './ProgressWheel';
 // import ToDoList from './ToDoList';
-import SubjectCards from './SubjectCards';
+// import SubjectCards from './SubjectCards';
 
 function Dashboard() {
-  const [tasks, setTasks] = useState([
-    { id: 1, text: 'Study Chapter 1', completed: false },
-    { id: 2, text: 'Complete Assignment 2', completed: false },
-    { id: 3, text: 'Revise Notes', completed: false },
-    { id: 4, text: 'Practice Problems', completed: false },
-    { id: 5, text: 'Group Study Session', completed: false },
-  ]);
+  // const [tasks, setTasks] = useState([
+  //   { id: 1, text: 'Study Chapter 1', completed: false },
+  //   { id: 2, text: 'Complete Assignment 2', completed: false },
+  //   { id: 3, text: 'Revise Notes', completed: false },
+  //   { id: 4, text: 'Practice Problems', completed: false },
+  //   { id: 5, text: 'Group Study Session', completed: false },
+  // ]);
 
   const navigate = useNavigate(); // Create a navigate function
 
@@ -26,9 +26,9 @@ function Dashboard() {
   };
 
 
-  const completedTasks = tasks.filter(task => task.completed).length;
-  const totalTasks = tasks.length;
-  const progressPercentage = (completedTasks / totalTasks) * 100;
+  // const completedTasks = tasks.filter(task => task.completed).length;
+  // const totalTasks = tasks.length;
+  const progressPercentage = (5 / 8) * 100;
 
   return (
     <div className="dashboard">
@@ -41,11 +41,11 @@ function Dashboard() {
       <div className="subject-section">
         {/* Directly navigate to form on button click */}
         <div className='button-wrapper'>
-          <button className='add-subject-button' onClick={handleAddSubjectClick}>Add Subject</button>
+          <button className='add-subject-button' onClick={handleAddSubjectClick}>Create Study Guide</button>
         </div>
-        <div className='cards-wrapper'>
+        {/* <div className='cards-wrapper'>
           <SubjectCards />
-        </div>
+        </div> */}
       </div>
     </div>
   );
