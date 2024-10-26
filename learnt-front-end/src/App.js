@@ -6,6 +6,9 @@ import { signInWithPopup, onAuthStateChanged, signOut } from 'firebase/auth';
 import './styles/App.css';
 import Dashboard from './components/Dashboard.js';
 import Navbar from './components/Navbar.js';
+import Form from './components/Form'; // Import the Form component
+import SubmissionReviews from './components/SubmissionReviews'; // Import the SubmissionReviews component
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -48,6 +51,9 @@ function App() {
           }
         />
         <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to="/" />} />
+        <Route path="/form" element={<Form />} /> {/* Ensure this route is defined */}
+        <Route path="/submission-review" element={<SubmissionReviews />} /> {/* Route for SubmissionReviews */}
+
       </Routes>
     </Router>
   );
