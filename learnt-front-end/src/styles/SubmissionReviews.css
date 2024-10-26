@@ -11,7 +11,7 @@ gap: 30px;
 justify-content: center;
 }
 
-h3 {
+h3, h4 {
 text-align: center;
 font-size: 20px;
 }
@@ -41,17 +41,21 @@ overflow-x: hidden; /* Hide horizontal overflow if any */
 }
 
 pre {
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-font-size: 15px;
-line-height: 1.5;
-white-space: pre-wrap; /* Allows text in <pre> to wrap to the next line */
-word-wrap: break-word; /* Ensures that long words wrap to the next line */
-overflow-wrap: break-word; /* Prevents overflow of long words */
-overflow-x: auto; /* Allows horizontal scrolling if there's long unbreakable text */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
+  overflow-x: auto; 
 }
 
+.questions-text{
+  margin-left: 15px;
+  margin-right: 15px;
+}
 
-.study-guide-pdf-button{
+.study-guide-pdf-button, .generate-questions-button{
   background-color: #5d9fd3;
   color: #ffffff;
   border: none;
@@ -69,7 +73,11 @@ overflow-x: auto; /* Allows horizontal scrolling if there's long unbreakable tex
   padding-top: 10px;
 }
 
-.pdf-button-wrapper{
+.generate-questions-button{
+  margin-right: 10px;
+}
+
+.pdf-button-wrapper, .questions-button-wrapper{
   padding: 10px;
   padding-top: 10px;
   flex: 1 1 calc(50% - 1rem);
@@ -78,4 +86,33 @@ overflow-x: auto; /* Allows horizontal scrolling if there's long unbreakable tex
   max-height: 50%;
   justify-content: center;
   align-items: center;
+}
+
+.questions-button-wrapper{
+  gap: 10px;
+}
+
+.button-wrapper{
+  display: flex;
+  flex-direction: row;
+}
+
+select{
+  font-size: 15px;
+}
+
+.practice-question-wrapper{
+  justify-content: center;
+  padding: 30px;
+  text-align: left;
+  flex: 1;
+  display: block;
+  margin: 23px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
 }
