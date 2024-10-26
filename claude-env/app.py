@@ -1,7 +1,7 @@
 import anthropic;
 from flask import Flask, jsonify, request;
 
-client = anthropic.Anthropic()
+client = anthropic.Anthropic(api_key='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')
 
 #subject = "Discrete Mathematics"
 #topics = "Proof by contradiction, proof by induction, set notation, set operations, set equivalence"
@@ -42,10 +42,45 @@ def create_study_guide():
 
     response = {
         "Message": "returning study guide to user",
-        "Content": study_guide_string
+        "Content": study_guide_string,
+        "Study Guide": create_study_planner(study_guide_string)
     }
 
     return jsonify(response)
+
+
+def create_study_planner(study_guide):
+    user_data = request.json
+    subject, topics, learning_goals = (user_data['subject'], user_data['topics'], user_data['learning_goals'])
+    test_date, session_number, session_length = (user_data['date'], user_data['number'], user_data['length'])
+    
+    study_planner = client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=100,
+        temperature=0,
+        system=f"You are an expert of time management helping a student plan their study schedule for an upcoming exam",
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": f"""I have a exam on {subject} on {test_date}. I have {session_number} study sessions of {session_length} hours each. 
+                                    I have a study guide that I want to use to study for the exam, which will be attached to the end of this prompt. I want to focus on the topics in {topics} and my learning goals are {learning_goals}.
+                                    Given the study guide, create a study plan that will help me study for the exam in the time I have available, 
+                                    for each study session, tell me what to study, how to study in terms how times for working and break time in minutes, and what to do after the study session.
+                                    STUDY GUIDE: {study_guide}
+                                """
+                    }
+                ]
+            }
+        ]
+    )
+
+    study_planner_string = str(study_planner.content)[17:-16].replace("\\n", "\n")
+
+    return study_planner_string
+
 
 if __name__ == '__main__':
     app.run(debug=True)
