@@ -1,7 +1,7 @@
 import anthropic;
 from flask import Flask, jsonify, request;
 
-client = anthropic.Anthropic(api_key="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")
+client = anthropic.Anthropic()
 
 #subject = "Discrete Mathematics"
 #topics = "Proof by contradiction, proof by induction, set notation, set operations, set equivalence"
