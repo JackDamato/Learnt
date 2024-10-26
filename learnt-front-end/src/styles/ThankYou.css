@@ -1,0 +1,15 @@
+.thank-you {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .thank-you h1 {
+    font-size: 22px;
+    margin-bottom: 1rem;
+  }
+  
+  .thank-you p {
+    font-size: 16px;
+    color: #555;
+  }
+  
