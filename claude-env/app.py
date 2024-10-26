@@ -1,3 +1,4 @@
+import json
 import os
 import anthropic;
 from flask import Flask, jsonify, request;
@@ -35,8 +36,30 @@ def create_study_guide_and_planner():
         "Study Planner": study_planner_global
     }
 
+    # Prepare data to save to JSON file
+    temp_data = {
+        "study_guide": study_guide_global,
+        "study_planner": study_planner_global,
+        "user_data": user_data
+    }
+
+    # Save to tempData.json
+    with open('./tempData.json', 'w') as json_file:
+        json.dump(temp_data, json_file, indent=4)
+
     return jsonify(response)
 
+
+@app.route('/data', methods=["GET"])
+def get_temp_data():
+    try:
+        with open('./tempData.json', 'r') as json_file:
+            data = json.load(json_file)
+        return jsonify(data)
+    except FileNotFoundError:
+        return jsonify({"error": "Data file not found."}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 

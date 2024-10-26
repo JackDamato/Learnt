@@ -22,6 +22,7 @@ function Form() {
       length: workTimePerSession,
     };
 
+
     try {
       const response = await fetch('/materials', {
         method: 'POST',
@@ -34,6 +35,7 @@ function Form() {
       if (response.ok) {
         const data = await response.json();
         console.log('Study Guide:', data.Content);
+
         // Navigate to the review page, passing the data to it
         navigate('/submission-review', {
           state: {

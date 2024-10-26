@@ -41,7 +41,7 @@ function Dashboard() {
       <div className="subject-section">
         {/* Directly navigate to form on button click */}
         <div className='button-wrapper'>
-          <button className='add-subject-button' onClick={handleAddSubjectClick}>Create Study Guide</button>
+          <button className='add-subject-button' onClick={handleAddSubjectClick}>Create New Study Guide</button>
         </div>
         {/* <div className='cards-wrapper'>
           <SubjectCards />

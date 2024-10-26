@@ -49,3 +49,33 @@ word-wrap: break-word; /* Ensures that long words wrap to the next line */
 overflow-wrap: break-word; /* Prevents overflow of long words */
 overflow-x: auto; /* Allows horizontal scrolling if there's long unbreakable text */
 }
+
+
+.study-guide-pdf-button{
+  background-color: #5d9fd3;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  flex: 1 1 calc(50% - 1rem);
+  height: 100%;
+  width: 50%;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.pdf-button-wrapper{
+  padding: 10px;
+  padding-top: 10px;
+  flex: 1 1 calc(50% - 1rem);
+  box-sizing: border-box;
+  text-align: center;
+  max-height: 50%;
+  justify-content: center;
+  align-items: center;
+}
