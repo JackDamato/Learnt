@@ -1,1 +1,1 @@
-.env*.local
+./claude-env/.env
