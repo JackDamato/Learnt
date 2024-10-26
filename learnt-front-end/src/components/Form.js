@@ -11,19 +11,43 @@ function Form() {
   const [workTimePerSession, setWorkTimePerSession] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
-      subjectClassName,
-      topicOfExam,
-      learningGoals,
-      testDate,
-      availableStudySessions,
-      workTimePerSession,
+      subject: subjectClassName,
+      topics: topicOfExam,
+      learning_goals: learningGoals,
+      date: testDate,
+      number: availableStudySessions,
+      length: workTimePerSession,
     };
-    
-    // Navigate to the review page, passing formData as state
-    navigate('/submission-review', { state: { formData } });
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Study Guide:', data.Content);
+        // Navigate to the review page, passing the data to it
+        navigate('/submission-review', {
+          state: {
+            formData,
+            studyGuide: data.Content,
+            studyPlanner: data["Study Guide"], // Assuming this is the key for the study planner
+          },
+        });
+      } else {
+        console.error('Failed to create study guide');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (

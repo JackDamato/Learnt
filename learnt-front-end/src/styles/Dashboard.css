@@ -26,8 +26,13 @@
 .subject-section {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: column;
 }
+
+.cards-wrapper{
+  margin-top: 0;
+}
+
 
 .subject-card {
   background-color: #ffffff;
@@ -38,3 +43,26 @@
   box-sizing: border-box;
   text-align: center;
 }
+
+.button-wrapper{
+  padding: 1rem;
+  flex: 1 1 calc(50% - 1rem);
+  box-sizing: border-box;
+  text-align: center;
+  max-height: 10%;
+}
+
+.add-subject-button {
+  background-color: #007aff;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  flex: 1 1 calc(50% - 1rem);
+  height: 100%;
+  width: 100%;
+}
+
