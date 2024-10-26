@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+
 import '../styles/Dashboard.css';
 import ProgressWheel from './ProgressWheel';
 import ToDoList from './ToDoList';
@@ -13,9 +15,16 @@ function Dashboard() {
     { id: 5, text: 'Group Study Session', completed: false },
   ]);
 
+  const navigate = useNavigate(); // Create a navigate function
+
   const handleTaskChange = (updatedTasks) => {
     setTasks(updatedTasks);
   };
+
+  const handleAddSubjectClick = () => {
+    navigate('/form'); // Navigate directly to the form page
+  };
+
 
   const completedTasks = tasks.filter(task => task.completed).length;
   const totalTasks = tasks.length;
@@ -30,6 +39,8 @@ function Dashboard() {
         <ToDoList tasks={tasks} setTasks={handleTaskChange} />
       </div>
       <div className="subject-section">
+        {/* Directly navigate to form on button click */}
+        <button onClick={handleAddSubjectClick}>Add Subject</button>
         <SubjectCards />
       </div>
     </div>
