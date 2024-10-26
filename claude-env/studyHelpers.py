@@ -31,7 +31,7 @@ def create_study_guide(subject, topics, learning_goals):
     return study_guide_string
 
 
-format_study_planner = "Session number: \n\n[Duration], \n[Topics and Concepts to study], \n[Practice Questions to focus on]\n [Any other pertinent information to the session focus]...... INCLUDE BREAK TIME AND SCHEDULING"
+format_study_planner = "Session number: \n\n[Duration], \n[Topics and Concepts to study], \n[Any other pertinent information to the session focus]...... INCLUDE BREAK TIME AND SCHEDULING"
 def create_study_planner(study_guide, subject, test_date, session_number, session_length, topics, learning_goals):
     
     study_planner = client.messages.create(
