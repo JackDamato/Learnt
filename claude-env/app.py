@@ -38,7 +38,7 @@ def create_study_guide():
         ]
     )
 
-    study_guide_string = str(study_guide.content)[17:-16].replace("\\\\", "\\")
+    study_guide_string = str(study_guide.content)[17:-16].replace("\\n", "\n")
 
     response = {
         "Message": "returning study guide to user",
