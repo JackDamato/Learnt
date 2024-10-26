@@ -1,6 +1,8 @@
+import os
 import anthropic;
 from flask import Flask, jsonify, request;
 
+ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
 
 client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 

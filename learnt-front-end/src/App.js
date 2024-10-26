@@ -51,6 +51,7 @@ function App() {
           }
         />
         <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to="/" />} />
+        <Route path="/submission-review" element={<SubmissionReviews />}/>
         <Route path="/form" element={<Form />} /> {/* Ensure this route is defined */}
         <Route path="/submission-review" element={<SubmissionReviews />} /> {/* Route for SubmissionReviews */}
 

@@ -16,10 +16,10 @@ function Navbar({ user, handleSignIn, handleSignOut }) {
       </button>
       {isMenuOpen && (
         <div className={`menu ${isMenuOpen ? 'show' : ''}`}>
-          <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
           {user ? (
             <>
-              <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>My Study Dashboard</Link>
+              <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>Dashboard</Link>
+              <Link to="/submission-review" onClick={() => setIsMenuOpen(false)}>My Study Guide</Link>
               <button className="menu-button-item" onClick={handleSignOut}>Sign Out</button>
             </>
           ) : (
