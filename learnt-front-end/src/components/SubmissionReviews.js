@@ -32,18 +32,26 @@ const SubmissionReviews = () => {
 
   const saveToPDF = () => {
     const doc = new jsPDF();
-
+    const pageWidth = doc.internal.pageSize.getWidth() - 20;
+  
     doc.setFontSize(18);
     doc.text(`Study Guide for ${subject}`, 10, 10);
+    
     doc.setFontSize(12);
-    doc.text(`\nStudy Guide:\n${studyGuide}`, 10, 20);
+    const studyGuideLines = doc.splitTextToSize(studyGuide, pageWidth);
+    doc.text(studyGuideLines, 10, 20);
     
     doc.addPage();
-    doc.text(`Study Planner:\n${studyPlanner}`, 10, 10);
-
+    doc.setFontSize(18);
+    doc.text(`Study Plan:`, 10, 10);
+    
+    doc.setFontSize(12);
+    const studyPlannerLines = doc.splitTextToSize(studyPlanner, pageWidth);
+    doc.text(studyPlannerLines, 10, 20); 
+  
     doc.save(`${subject} Study Guide.pdf`);
   };
-
+  
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -56,7 +64,7 @@ const SubmissionReviews = () => {
     <div>
       {studyGuide ? (
         <>
-        <div className='pdf-button-wrapper'>
+          <div className='pdf-button-wrapper'>
           <button onClick={saveToPDF} className='study-guide-pdf-button'>
             Download {subject} Study Guide pdf
           </button>
