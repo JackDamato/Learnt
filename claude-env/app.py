@@ -3,6 +3,10 @@ from flask import Flask, jsonify, request;
 
 client = anthropic.Anthropic()
 
+#subject = "Discrete Mathematics"
+#topics = "Proof by contradiction, proof by induction, set notation, set operations, set equivalence"
+#learning_goals = "I'm struggling in proof by induction and I want to learn how to do it better"
+
 app = Flask(__name__)
 
 @app.route('/', methods=["POST"])
