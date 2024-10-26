@@ -1,85 +1,70 @@
 import os
 import anthropic;
 from flask import Flask, jsonify, request;
+import os
+import studyHelpers
+from dotenv import load_dotenv
 
-ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
+load_dotenv()
+api_key = os.getenv("ANTHROPIC_API_KEY")
+client = anthropic.Anthropic(api_key=api_key)
+# '7c921b05e459fd3a2cd14b0fe2a7dc6367f489fe'
 
-client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
-
-
-#subject = "Discrete Mathematics"
-#topics = "Proof by contradiction, proof by induction, set notation, set operations, set equivalence"
-#learning_goals = "I'm struggling in proof by induction and I want to learn how to do it better"
+study_guide_global = None
+study_planner_global = None
+subject_global = None
+topics_global = None
+learning_goals_global = None
+test_date_global = None
+session_number_global = None
+session_length_global = None 
 
 app = Flask(__name__)
 
-@app.route('/', methods=["POST"])
-def create_study_guide():
+@app.route('/materials', methods=["POST"])
+def create_study_guide_and_planner():
     user_data = request.json
-    subject, topics, learning_goals = (user_data['subject'], user_data['topics'], user_data['learning_goals'])
+    subject_global, topics_global, learning_goals_global = (user_data['subject'], user_data['topics'], user_data['learning_goals'])
+    test_date_global, session_number_global, session_length_global = (user_data['date'], user_data['number'], user_data['length'])
 
-    study_guide = client.messages.create(
-        model="claude-3-5-sonnet-20241022",
-        max_tokens=2000,
-        temperature=0,
-        system=f"You are an expert educator in {subject} helping a student learn this topic in preparation for an exam",
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": f"""I am a student studying for an exam in {subject}. For each of the topics in {topics} create a 
-                                    detailed study guide that describes in depth the topic, definitions related to the topic, 
-                                    concepts related to the topic, how it can be tested on an exam, and example questions and solutions.
-                                    I have some focused goals of subjects I want to focus on: {learning_goals}. Do not let this affect any 
-                                    other subjects, just go further into depth for learning_goals
-                                    Combine each of these into an organized study guide that will help me study for the exam.
-                                """
-                    }
-                ]
-            }
-        ]
-    )
-
-    study_guide_string = str(study_guide.content)[17:-16].replace("\\n", "\n")
+    study_guide_global = studyHelpers.create_study_guide(subject_global, topics_global, learning_goals_global)
+    study_planner_global = studyHelpers.create_study_planner(study_guide_global, subject_global, test_date_global, session_number_global, session_length_global, topics_global, learning_goals_global)
 
     response = {
         "Message": "returning study guide to user",
-        "Content": study_guide_string,
-        "Study Guide": create_study_planner(study_guide_string)
+        "Study Guide": study_guide_global,
+        "Study Planner": study_planner_global
     }
 
     return jsonify(response)
 
 
-format_study_planner = "Session number: \n\n[Duration], \n[Topics and Concepts to study], \n[Practice Questions to focus on]\n [Any other pertinent information to the session focus]...... INCLUDE BREAK TIME AND SCHEDULING"
 
-def create_study_planner(study_guide):
+
+format_study_questions = "Session number: \n\n[Study Question], \n[Answer], \n[Explanation of the answer], repeat for multiple questions (questions should have a range of difficulty, some multiple choice and some long answer/show-your-work), repeat for every session number"
+@app.route("/questions", methods=["POST"])
+def create_study_questions():
     user_data = request.json
-    subject, topics, learning_goals = (user_data['subject'], user_data['topics'], user_data['learning_goals'])
-    test_date, session_number, session_length = (user_data['date'], user_data['number'], user_data['length'])
-    
-    study_planner = client.messages.create(
+    study_questions = client.messages.create(
         model="claude-3-5-sonnet-20241022",
         max_tokens=1000,
         temperature=0,
-        system=f"You are an expert of time management helping a student plan their study schedule for an upcoming exam",
+        system=f"You are an expert educator in {subject_global} helping a student learn this topic in preparation for an exam",
         messages=[
             {
                 "role": "user",
                 "content": [
                     {
                         "type": "text",
-                        "text": f"""I have a exam on {subject} on {test_date}. I have {session_number} study sessions of {session_length} hours each. 
-                                    I have a study guide and study planner format that I want to use to study for the exam, which will be attached to the end of this prompt. 
-                                    I want to focus on the topics in {topics} and my learning goals are {learning_goals}.
-                                    Given the study guide, create a study plan that will help me study for the exam in the time I have available, 
-                                    for each study session explicity: tell me what to study, how to study in terms how times for working and break time in minutes, 
-                                    and what to do after the study session.
-                                    STUDY GUIDE: {study_guide}
-                                    FORMAT OF STUDY PLANNER: {format_study_planner}
-                                    Repeat the format above for every single session
+                        "text": f"""I am a student studying for an exam in {subject_global}. For each of the topics in {topics_global} create a 
+                                    study questions for each topic that will help me study for the exam, the questions should range 
+                                    from easy to hard and should be a mix of multiple choice, true/false, and short answer questions. 
+                                    For each question, provide the answer and an explanation of the answer. 
+                                    These questions should align with study session topic in the study planner's session day.
+                                    STUDY GUIDE: {study_guide_global}
+                                    STUDY PLANNER: {study_planner_global}
+                                    FORMAT OF STUDY QUESTIONS: {format_study_questions}
+                                    DO THIS WITH EVERY SESSION, SHOULD HAVE A TOTAL OF {session_number_global} SESSIONS
                                 """
                     }
                 ]
@@ -87,9 +72,10 @@ def create_study_planner(study_guide):
         ]
     )
 
-    study_planner_string = str(study_planner.content)[17:-16].replace("\\n", "\n")
+    study_questions_string = str(study_questions.content)[17:-16].replace("\\n", "\n")
 
-    return study_planner_string
+    return study_questions_string
+
 
 if __name__ == '__main__':
     app.run(debug=True)

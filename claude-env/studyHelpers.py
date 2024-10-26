@@ -1,15 +1,8 @@
 import anthropic;
-from flask import Flask, jsonify, request;
 
 client = anthropic.Anthropic()
 
-app = Flask(__name__)
-
-@app.route('/', methods=["POST"])
-def create_study_guide():
-    user_data = request.json
-    subject, topics, learning_goals = (user_data['subject'], user_data['topics'], user_data['learning_goals'])
-
+def create_study_guide(subject, topics, learning_goals):
     study_guide = client.messages.create(
         model="claude-3-5-sonnet-20241022",
         max_tokens=2000,
@@ -35,24 +28,15 @@ def create_study_guide():
     )
 
     study_guide_string = str(study_guide.content)[17:-16].replace("\\n", "\n")
-
-    response = {
-        "Message": "returning study guide to user",
-        "Content": study_guide_string,
-        "Study Guide": create_study_planner(study_guide_string)
-    }
-
-    return jsonify(response)
+    return study_guide_string
 
 
-def create_study_planner(study_guide):
-    user_data = request.json
-    subject, topics, learning_goals = (user_data['subject'], user_data['topics'], user_data['learning_goals'])
-    test_date, session_number, session_length = (user_data['date'], user_data['number'], user_data['length'])
+format_study_planner = "Session number: \n\n[Duration], \n[Topics and Concepts to study], \n[Practice Questions to focus on]\n [Any other pertinent information to the session focus]...... INCLUDE BREAK TIME AND SCHEDULING"
+def create_study_planner(study_guide, subject, test_date, session_number, session_length, topics, learning_goals):
     
     study_planner = client.messages.create(
         model="claude-3-5-sonnet-20241022",
-        max_tokens=100,
+        max_tokens=1000,
         temperature=0,
         system=f"You are an expert of time management helping a student plan their study schedule for an upcoming exam",
         messages=[
@@ -62,20 +46,19 @@ def create_study_planner(study_guide):
                     {
                         "type": "text",
                         "text": f"""I have a exam on {subject} on {test_date}. I have {session_number} study sessions of {session_length} hours each. 
-                                    I have a study guide that I want to use to study for the exam, which will be attached to the end of this prompt. I want to focus on the topics in {topics} and my learning goals are {learning_goals}.
+                                    I have a study guide and study planner format that I want to use to study for the exam, which will be attached to the end of this prompt. 
+                                    I want to focus on the topics in {topics} and my learning goals are {learning_goals}.
                                     Given the study guide, create a study plan that will help me study for the exam in the time I have available, 
-                                    for each study session, tell me what to study, how to study in terms how times for working and break time in minutes, and what to do after the study session.
+                                    for each study session explicity: tell me what to study, how to study in terms how times for working and break time in minutes, 
+                                    and what to do after the study session.
                                     STUDY GUIDE: {study_guide}
+                                    FORMAT OF STUDY PLANNER: {format_study_planner}
+                                    Repeat the format above for every single session
                                 """
                     }
                 ]
             }
         ]
     )
-
     study_planner_string = str(study_planner.content)[17:-16].replace("\\n", "\n")
-
     return study_planner_string
-
-if __name__ == '__main__':
-    app.run(debug=True)
