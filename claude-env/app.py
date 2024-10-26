@@ -2,7 +2,6 @@ import anthropic;
 from flask import Flask, jsonify, request;
 
 
-ANTHROPIC_API_KEY = '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'
 client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 
 
