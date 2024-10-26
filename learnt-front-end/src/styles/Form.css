@@ -19,7 +19,7 @@
 }
 
 .form .submit-button {
-  background-color: #007bff; /* Blue background for submit button */
+  background-color: #5d9fd3; /* Blue background for submit button */
   color: white; /* White text */
   padding: 10px; /* Padding inside button */
   border: none; /* Remove border */
@@ -29,5 +29,5 @@
 }
 
 .form .submit-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #4291ce; /* Darker blue on hover */
 }

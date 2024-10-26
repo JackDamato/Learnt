@@ -9,7 +9,11 @@ function Navbar({ user, handleSignIn, handleSignOut }) {
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-logo" onClick={() => setIsMenuOpen(false)}>
-        Learn't
+        <img 
+            src="/logo2.png" 
+            alt="Home" 
+            className="navbar-logo-image"
+          />
       </Link>
       <button className="menu-button" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         ☰

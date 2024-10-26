@@ -23,11 +23,11 @@ const SubmissionReviews = () => {
           <div className="body">
             <div className="study-guide-wrapper">
               <h3>Generated Study Guide:</h3>
-              <pre>{studyGuide}</pre>
+              <p>{studyGuide}</p>
             </div>
             <div className="study-planner-wrapper">
               <h3>Generated Study Planner:</h3>
-              <pre>{studyPlanner}</pre>
+              <p>{studyPlanner}</p>
             </div>
           </div>
         </div>

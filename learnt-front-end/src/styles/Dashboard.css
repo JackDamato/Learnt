@@ -53,7 +53,7 @@
 }
 
 .add-subject-button {
-  background-color: #007aff;
+  background-color: #5d9fd3;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -65,4 +65,7 @@
   height: 100%;
   width: 100%;
 }
-
+.add-subject-button:hover {
+  background-color: #4291ce; /* Darker blue on hover */
+}
+/* #5d9fd3 */

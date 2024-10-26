@@ -2,8 +2,8 @@ import React from 'react';
 import '../styles/ProgressWheel.css';
 
 function ProgressWheel({ percentage }) {
-  const radius = 50;
-  const stroke = 8;
+  const radius = 200;
+  const stroke = 35;
   const normalizedRadius = radius - stroke * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;

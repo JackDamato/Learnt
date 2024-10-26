@@ -23,7 +23,7 @@ function Form() {
     };
 
     try {
-      const response = await fetch('/', {
+      const response = await fetch('/materials', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,8 +38,8 @@ function Form() {
         navigate('/submission-review', {
           state: {
             formData,
-            studyGuide: data.Content,
-            studyPlanner: data["Study Guide"], // Assuming this is the key for the study planner
+            studyGuide: data["Study Guide"],
+            studyPlanner: data["Study Planner"], // Assuming this is the key for the study planner
           },
         });
       } else {
@@ -89,7 +89,7 @@ function Form() {
       />
       <input
         type="text"
-        placeholder="Average Time Per Session (in Minutes)"
+        placeholder="Average Time Per Session (in Hours)"
         value={workTimePerSession}
         onChange={(e) => setWorkTimePerSession(e.target.value)}
         required
