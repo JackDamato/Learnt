@@ -1,0 +1,15 @@
+/* ProgressWheel.css */
+
+.progress-wheel {
+  text-align: center;
+}
+
+.progress-wheel svg {
+  transform: rotate(-90deg);
+}
+
+.progress-text {
+  margin-top: 0.5rem;
+  font-size: 18px;
+  font-weight: bold;
+}

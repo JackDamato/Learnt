@@ -1,0 +1,40 @@
+/* Dashboard.css */
+
+.dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+.progress-section, .todo-section, .subject-section {
+  flex: 1;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-right: 1px solid #e0e0e0;
+}
+
+.todo-section {
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+}
+
+.progress-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subject-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.subject-card {
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  flex: 1 1 calc(50% - 1rem);
+  box-sizing: border-box;
+  text-align: center;
+}

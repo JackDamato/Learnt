@@ -1,0 +1,36 @@
+/* SubjectCards.css */
+
+.subject-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 1rem; /* Space above the subject cards */
+  }
+  
+  .subject-card {
+    background-color: #ffffff; /* Card background color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect for depth */
+    border-radius: 8px; /* Rounded corners */
+    padding: 1.5rem; /* Padding inside the card */
+    flex: 1 1 calc(30% - 1rem); /* Allow 3 cards per row with space between */
+    box-sizing: border-box; /* Include padding in width calculation */
+    margin: 0.5rem; /* Margin around the card */
+    transition: transform 0.2s ease; /* Animation on hover */
+  }
+  
+  .subject-card:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+  }
+  
+  .subject-card h4 {
+    margin: 0 0 0.5rem; /* Margin below the heading */
+    font-size: 1.2rem; /* Font size for the subject title */
+    color: #333; /* Text color */
+  }
+  
+  .subject-card p {
+    margin: 0; /* Remove default margin */
+    font-size: 1rem; /* Font size for the description */
+    color: #666; /* Text color for description */
+  }
+  

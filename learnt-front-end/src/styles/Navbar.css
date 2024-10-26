@@ -1,71 +1,67 @@
-/* NavigationBar.css */
+/* Navbar.css */
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px; /* Padding for the navbar */
-  background-color: #ffffff; /* White background */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  position: relative; /* Relative positioning for dropdown */
-  z-index: 1000; /* Ensure navbar is above other content */
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
 }
 
-.navbar h1 {
-  color: #ff385c; /* Airbnb red */
-  margin: 0; /* Remove default margin */
-  font-size: 24px; /* Title size */
+.navbar-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007aff;
+  text-decoration: none;
 }
 
 .menu-button {
-  background: none; /* Remove default button background */
-  border: none; /* Remove default border */
-  font-size: 24px; /* Size of the menu icon */
-  cursor: pointer; /* Pointer on hover */
-  color: #ff385c; /* Icon color */
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #007aff;
 }
 
 .menu {
-  position: absolute; /* Position the dropdown menu */
-  right: 20px; /* Align to the right */
-  top: 60px; /* Below the navbar */
-  background-color: white; /* White background for menu */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
-  border-radius: 5px; /* Rounded corners */
-  display: none; /* Initially hidden */
+  position: absolute;
+  right: 1rem;
+  top: 60px; /* Adjust this value to align the menu correctly */
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 200px; /* Adjust as needed for your menu width */
+}
+
+.menu.show {
+  display: block;
 }
 
 .menu a,
-.menu button {
-  display: block; /* Stack links vertically */
-  padding: 10px 20px; /* Padding for each menu item */
-  color: #333; /* Dark gray for text */
-  text-decoration: none; /* Remove underline */
-  transition: background-color 0.3s ease; /* Transition for hover effect */
+.menu-button-item {
+  display: block;
+  width: 100%;
+  margin: 0;
+  text-decoration: none;
+  color: #007aff;
+  font-size: 16px;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
 }
 
 .menu a:hover,
-.menu button:hover {
-  background-color: #f7f7f7; /* Light gray on hover */
+.menu-button-item:hover {
+  background-color: #f0f0f0;
 }
 
-.menu button {
-  border: none; /* Remove button borders */
-  cursor: pointer; /* Pointer on hover */
-}
-
-/* Show menu on button click */
-.menu.show {
-  display: block; /* Show dropdown menu when active */
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column; /* Stack items vertically on small screens */
-    align-items: flex-start; /* Align to the start */
-  }
-
-  .menu-button {
-    margin-top: 10px; /* Space between title and button */
-  }
+.menu a:not(:last-child),
+.menu-button-item:not(:last-child) {
+  border-bottom: 1px solid #e0e0e0;
 }

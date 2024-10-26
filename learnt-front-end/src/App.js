@@ -1,8 +1,9 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { auth, googleProvider } from './firebaseConfig';
 import { signInWithPopup, onAuthStateChanged, signOut } from 'firebase/auth';
-import './styles/General.css';
+import './styles/App.css';
 import Dashboard from './components/Dashboard.js';
 import Navbar from './components/Navbar.js';
 
@@ -31,7 +32,7 @@ function App() {
 
   return (
     <Router>
-      <Navbar user={user} handleSignOut={handleSignOut} />
+      <Navbar user={user} handleSignIn={handleSignIn} handleSignOut={handleSignOut} />
       <Routes>
         <Route
           path="/"
@@ -40,8 +41,8 @@ function App() {
               <Dashboard user={user} />
             ) : (
               <div className="home-page">
-                <h1>Join Learn't</h1>
-                <button onClick={handleSignIn}>Sign in with Google</button>
+                <h1>Welcome to Learn't</h1>
+                <p>Your learning journey begins here. Use the menu to sign in!</p>
               </div>
             )
           }
