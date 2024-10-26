@@ -35,13 +35,13 @@ body {
   .navbar-brand {
     font-size: 18px;
     font-weight: 600;
-    color: #007aff;
+    color: #5d9fd3;
     text-decoration: none;
   }
   
   .navbar-link {
     font-size: 16px;
-    color: #007aff;
+    color: #5d9fd3;
     text-decoration: none;
   }
   
@@ -88,11 +88,11 @@ body {
   }
   
   .form-group input:focus {
-    border-color: #007aff;
+    border-color: #5d9fd3;
   }
   
   .submit-button {
-    background-color: #007aff;
+    background-color: #5d9fd3;
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -104,7 +104,7 @@ body {
   }
   
   .submit-button:hover {
-    background-color: #005bb5;
+    background-color: #4291ce;
   }
   
   .thank-you h1 {

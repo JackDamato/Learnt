@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/ProgressWheel.css';
 
 function ProgressWheel({ percentage }) {
-  const radius = 200;
+  const radius = 175;
   const stroke = 35;
   const normalizedRadius = radius - stroke * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
@@ -21,7 +21,7 @@ function ProgressWheel({ percentage }) {
           cy={radius}
         />
         <circle
-          stroke="#007aff"
+          stroke="#5d9fd3"
           fill="transparent"
           strokeWidth={stroke}
           strokeDasharray={circumference + ' ' + circumference}
