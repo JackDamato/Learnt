@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate for naviga
 
 import '../styles/Dashboard.css';
 import ProgressWheel from './ProgressWheel';
-import ToDoList from './ToDoList';
+// import ToDoList from './ToDoList';
 import SubjectCards from './SubjectCards';
 
 function Dashboard() {
@@ -17,9 +17,9 @@ function Dashboard() {
 
   const navigate = useNavigate(); // Create a navigate function
 
-  const handleTaskChange = (updatedTasks) => {
-    setTasks(updatedTasks);
-  };
+  // const handleTaskChange = (updatedTasks) => {
+  //   setTasks(updatedTasks);
+  // };
 
   const handleAddSubjectClick = () => {
     navigate('/form'); // Navigate directly to the form page
@@ -35,13 +35,17 @@ function Dashboard() {
       <div className="progress-section">
         <ProgressWheel percentage={progressPercentage} />
       </div>
-      <div className="todo-section">
+      {/* <div className="todo-section">
         <ToDoList tasks={tasks} setTasks={handleTaskChange} />
-      </div>
+      </div> */}
       <div className="subject-section">
         {/* Directly navigate to form on button click */}
-        <button onClick={handleAddSubjectClick}>Add Subject</button>
-        <SubjectCards />
+        <div className='button-wrapper'>
+          <button className='add-subject-button' onClick={handleAddSubjectClick}>Add Subject</button>
+        </div>
+        <div className='cards-wrapper'>
+          <SubjectCards />
+        </div>
       </div>
     </div>
   );

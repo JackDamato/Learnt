@@ -27,14 +27,14 @@
 .menu {
   position: absolute;
   right: 1rem;
-  top: 60px; /* Adjust this value to align the menu correctly */
+  top: 60px; 
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 0;
   display: flex;
   flex-direction: column;
-  width: 200px; /* Adjust as needed for your menu width */
+  width: 200px; 
 }
 
 .menu.show {
