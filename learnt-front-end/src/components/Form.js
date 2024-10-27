@@ -37,8 +37,8 @@ function Form() {
   
       if (response.ok) {
         const data = await response.json();
-        const studyGuideContent = data["Study Guide"];
-        const studyPlannerContent = data["Study Planner"];
+        const studyGuideContent = data.study_guide;
+        const studyPlannerContent = data.study_planner;
   
         // Save the study guide information in localStorage
         const studyGuides = JSON.parse(localStorage.getItem('studyGuides')) || [];

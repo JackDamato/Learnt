@@ -12,7 +12,7 @@ h2 {
 p {
   margin: 0; /* Remove margin for paragraphs */
   padding: 0; 
-  line-height: 1.2; /* Adjust line height for closer text */
+  line-height: 0; /* Adjust line height for closer text */
 }
 
 .subject-section, .previous-study-guides {
@@ -24,6 +24,7 @@ p {
   align-items: center;
   justify-content: flex-start; /* Align items at the top */
 }
+
 
 .previous-study-guides {
   border-right: 1px solid #e0e0e0;
@@ -54,7 +55,7 @@ p {
 .button-wrapper {
   width: 100%;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 5rem;
 }
 
 .add-subject-button {
@@ -67,7 +68,7 @@ p {
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   width: 100%;
-  height: 100%;
+  height: 200%;
   padding: 0.75rem;
 }
 
@@ -83,7 +84,8 @@ p {
   border-radius: 4px; 
   cursor: pointer; 
   font-size: 14px; 
-  margin-top: 0.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
   width: 70%;
 }
 

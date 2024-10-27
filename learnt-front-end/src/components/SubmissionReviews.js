@@ -132,6 +132,7 @@ const SubmissionReviews = () => {
     doc.save(`${subject} Study Guide.pdf`);
   };
   
+
   if (error) {
     return <p>Error fetching data: {error}</p>;
   }
