@@ -91,6 +91,38 @@ def get_temp_data():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/tutor', methods=["POST"])
+def ai_tutor():
+    user_input = request.json
+    prompt = user_input['prompt']
+    json_data = studyHelpers.import_temp_json()
+    subject, guide, planner = (json_data['user_data']['subject'], json_data['study_guide'], json_data['study_planner'],)
+
+
+    ai_tutor = client.completions.create(
+        model="claude-2",
+        max_tokens_to_sample=500,
+        temperature=0,
+        prompt=f"\n\nHuman:{prompt}... You are an expert educator in {subject} helping a student learn this topic in preparation for an exam. Provide a detailed explanation with very well explained information to answer the users' prompt.\n\nAssistant:"
+#        system=f"You are an expert educator in {subject} helping a student learn this topic in preparation for an exam",
+#       messages=[
+#            {
+#               "role": "user",
+#                "content": [
+#                    {
+#                        "type": "text",
+#                        "text": f"{prompt}. Provide a detailed explanation with very well explained information to answer the users' prompt."
+#                    }
+#                ]
+#            }
+#        ]
+    )
+    return jsonify(str(ai_tutor.completion))
+    ai_tutor_string = str(ai_tutor.content)[17:-16].replace("\\n", "\n")
+    return jsonify(ai_tutor_string)
+
+
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
