@@ -1,0 +1,128 @@
+.chatbot-container {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    max-height: 400px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.chatbot-container.open {
+    display: flex;
+}
+
+.chatbot-header {
+    background-color: #5d9fd3;
+    color: white;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+.chatbot-messages {
+    padding: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #f5f5f5;
+}
+
+.message {
+    max-width: 80%;
+    margin: 5px 0;
+    padding: 12px 16px; /* Increased padding for better spacing */
+    border-radius: 12px;
+    word-wrap: break-word;
+    clear: both;
+    font-size: 16px; /* Slightly larger font for better readability */
+    line-height: 1.5; /* Increased line height for spacing between lines */
+}
+
+.message.user {
+    background-color: #5d9fd3;
+    color: white;
+    margin-left: auto;
+    border-radius: 12px 12px 0 12px;
+}
+
+.message.ai {
+    background-color: #e0e0e0;
+    color: #333;
+    margin-right: auto;
+    border-radius: 12px 12px 12px 0;
+}
+
+/* Styling for text emphasis */
+.highlight {
+    font-weight: bold;
+    color: #5d9fd3; /* Match the user message color */
+}
+
+/* Styling for lists */
+.message ul {
+    margin: 10px 0; /* Space around the list */
+    padding-left: 20px; /* Indentation for list items */
+}
+
+.message li {
+    margin-bottom: 5px; /* Space between list items */
+}
+
+/* Adding styles for quoted text or important notes */
+.message blockquote {
+    border-left: 4px solid #5d9fd3; /* Left border for emphasis */
+    padding-left: 10px; /* Space between border and text */
+    color: #555; /* Slightly lighter color for the quote */
+    font-style: italic; /* Italic for quote style */
+    margin: 10px 0; /* Space around blockquote */
+}
+
+.chatbot-input-area {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+.chatbot-input-area input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 0 0 0 8px;
+    outline: none;
+}
+
+.chatbot-input-area button {
+    background-color: #5d9fd3;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 0 0 8px 0;
+    cursor: pointer;
+}
+
+.chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #5d9fd3;
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.chatbot-icon:hover {
+    background-color: #4291ce;
+}

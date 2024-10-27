@@ -2,6 +2,7 @@ import { React, useEffect, useState } from 'react';
 import { jsPDF } from 'jspdf';
 import "../styles/SubmissionReviews.css";
 import Loading from './Loading';
+import Chatbot from './Chatbot';
 
 const SubmissionReviews = () => {
   const [studyGuide, setStudyGuide] = useState('');
@@ -11,6 +12,7 @@ const SubmissionReviews = () => {
   const [practiceQuestions, setPracticeQuestions] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [totalSessions, setTotalSessions] = useState(1);
 
   
 
@@ -26,6 +28,7 @@ const SubmissionReviews = () => {
         setStudyGuide(data.study_guide);
         setStudyPlanner(data.study_planner);
         setSubject(data.user_data.subject);
+        setTotalSessions(data.user_data.number);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -143,7 +146,7 @@ const SubmissionReviews = () => {
       <div className="button-wrapper" style={{ display: 'flex', justifyContent: 'space-between'}}>
         <div className="pdf-button-wrapper">
           <button onClick={saveToPDF} className="study-guide-pdf-button">
-            Save {subject} Study Guide
+            Download {subject} Study Guide
           </button>
         </div>
         <div className="questions-button-wrapper">
@@ -151,7 +154,7 @@ const SubmissionReviews = () => {
             Generate Practice Questions for Session {sessionNumber}
           </button>
           <select value={sessionNumber} onChange={(e) => setSessionNumber(e.target.value)}>
-            {Array.from({ length: 4 }, (_, i) => ( // Adjust the length based on actual session numbers
+            {Array.from({ length: totalSessions }, (_, i) => ( // Adjust the length based on actual session numbers
               <option key={i + 1} value={i + 1}>
                 Session {i + 1}
               </option>
@@ -181,6 +184,9 @@ const SubmissionReviews = () => {
       ) : (
         <p>No submission data available. Please submit the form to generate study materials.</p>
       )}
+
+      <Chatbot /> 
+
     </div>
   );
 };
