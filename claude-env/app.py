@@ -50,7 +50,7 @@ def create_study_questions():
     format_study_questions = "Session current #: \n\n[Study Question], \n[Answer], \n[Explanation of the answer], repeat for multiple questions (the questions should have a range of difficulty, some multiple choice, some true/false, some short answers and at least 2 long answer/show-your-work questions that are difficult)"
     study_questions = client.completions.create(
         model="claude-2",
-        max_tokens=2000,
+        max_tokens_to_sample=2000,
         temperature=0,
         prompt=f"""\n\nHuman:You are an expert educator in {subject} helping a student learn this topic in preparation for an exam... I am a student studying for an exam in {subject}. 
                 You will create AT LEAST 10  DETAILED study questions for session {current_session} 
@@ -65,7 +65,7 @@ def create_study_questions():
                 Return the questions in the same formatting style as guide and planner include newlines and proper spacing between questions.\n\nAssistant:""",
     )
 
-    study_questions_string = str(study_questions.content)[17:-16].replace("\\n", "\n")
+    study_questions_string = str(study_questions.completion)
 
     return jsonify(study_questions_string)
 
